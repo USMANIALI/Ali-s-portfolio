@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Ali Usmani — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06060e;
+  --surface: #0d0d1c;
+  --surface2: #131326;
+  --gold: #c9a84c;
+  --gold-light: #e8d5a3;
+  --gold-dim: rgba(201,168,76,0.12);
+  --gold-border: rgba(201,168,76,0.22);
+  --white: #f0ede8;
+  --muted: #6a6a98;
+  --body: #a0a0c8;
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  --fb: 'DM Sans', sans-serif;
+  --fm: 'DM Mono', monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+#cur{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s;}
+#curR{width:32px;height:32px;border:1px solid rgba(201,168,76,.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s;}
+#curR.h{width:52px;height:52px;border-color:var(--gold);background:rgba(201,168,76,.04);}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:.35;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:26px 64px;display:flex;justify-content:space-between;align-items:center;transition:all .4s;}
+nav.s{background:rgba(6,6,14,.94);backdrop-filter:blur(24px);padding:16px 64px;border-bottom:1px solid var(--gold-border);}
+.nav-logo{font-family:var(--fd);font-size:1.45rem;font-weight:600;color:var(--gold);text-decoration:none;letter-spacing:.04em;}
+.nav-links{display:flex;gap:38px;list-style:none;align-items:center;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;transition:color .3s;cursor:none;}
+.nav-links a:hover{color:var(--gold-light);}
+.nav-cta{padding:8px 20px;border:1px solid var(--gold-border);color:var(--gold)!important;border-radius:2px;transition:background .3s,border-color .3s!important;}
+.nav-cta:hover{background:var(--gold-dim)!important;border-color:var(--gold)!important;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 64px;position:relative;overflow:hidden;}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.035) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 100%);}
+.h-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,.07) 0%,transparent 68%);top:50%;left:40%;transform:translate(-50%,-50%);pointer-events:none;}
+.h-line{font-family:var(--fm);font-size:.7rem;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:22px;opacity:0;animation:fup .8s .3s forwards;}
+.h-name{font-family:var(--fd);font-size:clamp(5rem,11vw,10rem);font-weight:300;line-height:.92;letter-spacing:-.025em;color:var(--white);opacity:0;animation:fup .9s .5s forwards;}
+.h-name em{font-style:italic;color:var(--gold);}
+.h-sub{margin-top:26px;font-size:1.05rem;color:var(--body);font-weight:300;max-width:560px;line-height:1.8;opacity:0;animation:fup .9s .8s forwards;}
+.h-tags{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;opacity:0;animation:fup .9s 1s forwards;}
+.h-tag{padding:6px 16px;border:1px solid var(--gold-border);border-radius:100px;font-size:.73rem;letter-spacing:.07em;color:var(--gold-light);background:var(--gold-dim);}
+.h-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fup .8s 1.6s forwards;}
+.h-scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sp 2.2s 2s infinite;}
+.h-scroll-txt{font-size:.62rem;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;}
+
+/* SECTION */
+section{padding:118px 64px;position:relative;}
+.s-label{font-family:var(--fm);font-size:.66rem;letter-spacing:.32em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.s-label::after{content:'';display:block;width:36px;height:1px;background:var(--gold);opacity:.5;}
+.s-title{font-family:var(--fd);font-size:clamp(2.8rem,5vw,4.6rem);font-weight:300;line-height:1.07;color:var(--white);margin-bottom:56px;}
+.s-title em{font-style:italic;color:var(--gold);}
+.div{width:calc(100% - 128px);height:1px;background:linear-gradient(to right,transparent,var(--gold-border),transparent);margin:0 64px;}
+
+/* ABOUT */
+#about{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.bio{font-size:1.08rem;line-height:1.9;color:var(--body);}
+.bio strong{color:var(--white);font-weight:500;}
+.bio .g{color:var(--gold-light);}
+.a-stats{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.stat{padding:22px;border:1px solid var(--gold-border);border-radius:4px;background:var(--surface);position:relative;overflow:hidden;transition:border-color .3s,transform .3s;cursor:none;}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.stat:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px);}
+.stat:hover::before{opacity:1;}
+.stat-n{font-family:var(--fd);font-size:2.6rem;font-weight:600;color:var(--gold);line-height:1;}
+.stat-l{font-size:.72rem;color:var(--muted);letter-spacing:.1em;margin-top:5px;text-transform:uppercase;}
+.a-quote{font-family:var(--fd);font-size:1.75rem;font-weight:300;font-style:italic;color:var(--gold-light);line-height:1.5;border-left:2px solid var(--gold);padding-left:26px;margin-bottom:36px;}
+.facts{display:flex;flex-direction:column;gap:14px;}
+.fact{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:var(--surface);border-radius:4px;border:1px solid rgba(201,168,76,.1);transition:border-color .3s;}
+.fact:hover{border-color:var(--gold-border);}
+.fi{font-size:1rem;flex-shrink:0;margin-top:2px;}
+.ft{font-size:.86rem;color:var(--body);line-height:1.5;}
+.ft strong{color:var(--white);font-weight:500;}
+
+/* EDUCATION */
+#education{background:var(--surface);}
+.tl{position:relative;padding-left:38px;}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),transparent);}
+.tl-item{position:relative;margin-bottom:52px;opacity:0;transform:translateX(-18px);transition:opacity .6s,transform .6s;}
+.tl-item.v{opacity:1;transform:translateX(0);}
+.tl-dot{position:absolute;left:-42px;top:6px;width:10px;height:10px;border-radius:50%;border:2px solid var(--gold);background:var(--bg);}
+.tl-dot::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:rgba(201,168,76,.1);}
+.tl-yr{font-family:var(--fm);font-size:.68rem;color:var(--gold);letter-spacing:.14em;margin-bottom:7px;}
+.tl-ttl{font-family:var(--fd);font-size:1.55rem;font-weight:500;color:var(--white);margin-bottom:4px;}
+.tl-sub{font-size:.83rem;color:var(--muted);margin-bottom:10px;}
+.tl-desc{font-size:.88rem;color:var(--body);line-height:1.72;max-width:580px;}
+
+/* MARQUEE */
+.mq{padding:38px 0;overflow:hidden;background:var(--surface);border-top:1px solid var(--gold-border);border-bottom:1px solid var(--gold-border);}
+.mq-track{display:flex;gap:44px;animation:mq 24s linear infinite;white-space:nowrap;}
+.mq-track:hover{animation-play-state:paused;}
+.mq-item{display:inline-flex;align-items:center;gap:14px;font-family:var(--fd);font-size:1.15rem;font-weight:300;color:var(--muted);flex-shrink:0;}
+.mq-item .dot{color:var(--gold);font-size:.45rem;}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:32px;}
+.exp-card{background:var(--surface);border:1px solid var(--gold-border);border-radius:6px;padding:38px;position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .4s;cursor:none;}
+.exp-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.025),transparent 55%);opacity:0;transition:opacity .3s;}
+.exp-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.4);box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.exp-card:hover::after{opacity:1;}
+.exp-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;flex-wrap:wrap;gap:12px;}
+.exp-org{font-family:var(--fd);font-size:1.65rem;font-weight:500;color:var(--white);}
+.exp-pl{font-size:.8rem;color:var(--muted);margin-top:3px;}
+.exp-badge{padding:5px 13px;border:1px solid var(--gold-border);border-radius:100px;font-size:.68rem;color:var(--gold-light);background:var(--gold-dim);white-space:nowrap;}
+.exp-bul{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.exp-bul li{font-size:.89rem;color:var(--body);line-height:1.68;padding-left:18px;position:relative;}
+.exp-bul li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.55;}
+
+/* WORK */
+#work{background:var(--surface);}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.work-card{background:var(--bg);border:1px solid var(--gold-border);border-radius:6px;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .35s;cursor:none;text-decoration:none;display:block;}
+.work-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.5);box-shadow:0 20px 50px rgba(0,0,0,.45);}
+.work-thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:2.2rem;position:relative;overflow:hidden;}
+.work-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,6,14,.85));}
+.work-lbl{position:absolute;bottom:11px;left:13px;font-family:var(--fm);font-size:.6rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;background:rgba(6,6,14,.75);padding:3px 9px;border-radius:2px;z-index:1;}
+.work-info{padding:18px 20px 20px;}
+.work-ttl{font-family:var(--fd);font-size:1.12rem;font-weight:500;color:var(--white);margin-bottom:5px;}
+.work-org{font-size:.73rem;color:var(--gold);letter-spacing:.05em;margin-bottom:9px;}
+.work-arrow{font-family:var(--fm);font-size:.62rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;transition:color .2s;}
+.work-arrow::after{content:' →';}
+.work-card:hover .work-arrow{color:var(--gold-light);}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.tool-card{background:var(--surface);border:1px solid var(--gold-border);border-radius:6px;padding:28px 22px;transition:transform .3s,border-color .3s;cursor:none;text-align:center;position:relative;overflow:hidden;}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.tool-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.4);}
+.tool-card:hover::before{opacity:1;}
+.tool-icon{font-size:1.9rem;margin-bottom:13px;}
+.tool-name{font-family:var(--fd);font-size:1.25rem;font-weight:500;color:var(--white);margin-bottom:5px;}
+.tool-cat{font-size:.68rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.ach-card{background:var(--surface);border:1px solid var(--gold-border);border-radius:6px;padding:28px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:none;}
+.ach-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+.ach-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.38);box-shadow:0 14px 44px rgba(0,0,0,.35);}
+.ach-card:hover::before{opacity:1;}
+.ach-rank{font-family:var(--fd);font-size:2.8rem;font-weight:700;color:var(--gold);opacity:.1;position:absolute;top:14px;right:18px;line-height:1;}
+.ach-emoji{font-size:1.5rem;margin-bottom:14px;}
+.ach-ttl{font-family:var(--fd);font-size:1.18rem;font-weight:500;color:var(--white);margin-bottom:7px;line-height:1.25;}
+.ach-org{font-size:.76rem;color:var(--gold);letter-spacing:.04em;margin-bottom:9px;font-weight:500;}
+.ach-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+
+/* SKILLS — creative cards, no percentage */
+#skills{background:var(--surface);}
+.skills-intro{font-size:1.05rem;color:var(--body);line-height:1.8;max-width:680px;margin-bottom:64px;}
+.skill-cats{display:flex;flex-direction:column;gap:52px;}
+.skill-cat-ttl{font-family:var(--fm);font-size:.66rem;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.skill-cat-ttl::after{content:'';flex:1;height:1px;background:var(--gold-border);}
+.skill-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.sk{background:var(--bg);border:1px solid var(--gold-border);border-radius:6px;padding:20px 18px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:none;}
+.sk:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.45);box-shadow:0 10px 32px rgba(0,0,0,.35);}
+.sk-glow{position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:radial-gradient(circle,rgba(201,168,76,.08),transparent 70%);pointer-events:none;}
+.sk-icon{font-size:1.4rem;margin-bottom:10px;}
+.sk-name{font-size:.84rem;color:var(--white);font-weight:500;line-height:1.3;margin-bottom:4px;}
+.sk-sub{font-size:.7rem;color:var(--muted);letter-spacing:.04em;}
+.soft-wrap{display:flex;flex-wrap:wrap;gap:10px;}
+.soft{padding:9px 18px;border:1px solid var(--gold-border);border-radius:100px;font-size:.78rem;color:var(--gold-light);background:var(--gold-dim);transition:border-color .25s,transform .2s;cursor:none;}
+.soft:hover{border-color:var(--gold);transform:scale(1.04);}
+
+/* CONTACT */
+#contact{text-align:center;}
+.c-inner{max-width:660px;margin:0 auto;}
+.c-email{font-family:var(--fd);font-size:clamp(1.6rem,4vw,2.6rem);font-weight:300;font-style:italic;color:var(--gold-light);text-decoration:none;display:block;margin:28px 0 10px;transition:color .3s;cursor:none;}
+.c-email:hover{color:var(--gold);}
+.c-details{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-bottom:36px;margin-top:10px;}
+.c-det{font-size:.84rem;color:var(--body);display:flex;align-items:center;gap:8px;text-decoration:none;transition:color .3s;cursor:none;}
+.c-det:hover{color:var(--gold-light);}
+.c-det span{color:var(--white);}
+.c-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.c-link{padding:12px 26px;border:1px solid var(--gold-border);border-radius:2px;color:var(--muted);text-decoration:none;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;transition:color .3s,border-color .3s,background .3s;cursor:none;}
+.c-link:hover{color:var(--gold);border-color:var(--gold);background:var(--gold-dim);}
+
+/* FOOTER */
+footer{padding:36px 64px;border-top:1px solid var(--gold-border);display:flex;justify-content:space-between;align-items:center;}
+.f-name{font-family:var(--fd);font-size:1.05rem;color:var(--gold);font-weight:600;}
+.f-copy{font-size:.7rem;color:var(--muted);letter-spacing:.05em;}
+.f-quote{font-family:var(--fd);font-style:italic;font-size:.84rem;color:var(--muted);max-width:280px;text-align:right;}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+.rv.v{opacity:1;transform:translateY(0);}
+
+/* KEYFRAMES */
+@keyframes fup{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes sp{0%,100%{opacity:1;}50%{opacity:.25;}}
+@keyframes mq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.tools-grid{grid-template-columns:repeat(2,1fr);}.skill-cards{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){nav{padding:18px 30px;}nav.s{padding:13px 30px;}.nav-links{gap:20px;}section{padding:80px 30px;}#hero{padding:0 30px;}#about{grid-template-columns:1fr;gap:36px;}.work-grid{grid-template-columns:repeat(2,1fr);}.ach-grid{grid-template-columns:repeat(2,1fr);}.skill-cards{grid-template-columns:repeat(2,1fr);}footer{flex-direction:column;gap:14px;text-align:center;}.f-quote{text-align:center;}.div{margin:0 30px;width:calc(100% - 60px);}}
+@media(max-width:600px){.nav-links{display:none;}.ach-grid{grid-template-columns:1fr;}.work-grid{grid-template-columns:1fr;}.tools-grid{grid-template-columns:repeat(2,1fr);}.a-stats{grid-template-columns:1fr 1fr;}.c-links{flex-direction:column;align-items:center;}.skill-cards{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Ali.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-grid"></div>
+  <div class="h-glow"></div>
+  <div class="h-line">New Delhi, India</div>
+  <h1 class="h-name">Hey, I'm<br><em>Ali.</em></h1>
+  <p class="h-sub">
+    A student of English Honours at Satyawati College, Delhi University — with a passion for business, people, and ideas that actually make a difference.
+  </p>
+  <div class="h-tags">
+    <span class="h-tag">🌊 Project Nira</span>
+    <span class="h-tag">📣 Content Creator</span>
+    <span class="h-tag">🏆 National Competitor</span>
+    <span class="h-tag">🤝 Enactus Satyawati</span>
+    <span class="h-tag">📊 Marketing and HR</span>
+    <span class="h-tag">🎮 Certified Game Developer</span>
+  </div>
+  <div class="h-scroll">
+    <div class="h-scroll-line"></div>
+    <span class="h-scroll-txt">Scroll</span>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div>
+    <div class="s-label">Who I Am</div>
+    <h2 class="s-title" style="margin-bottom:28px;">The story<br>so <em>far.</em></h2>
+    <p class="bio">I'm <strong>Muhammad Ali Usmani</strong>, a student of <strong>English Honours at Satyawati College, Delhi University</strong> — with a passion for business, people, and ideas that actually make a difference.</p>
+    <br>
+    <p class="bio">I'm deeply involved in everything from literary studies to on-ground social impact work. As part of <strong>Enactus Satyawati</strong>, I've contributed to <span class="g">Project Nira</span>, a sustainability initiative built around natural products and river conservation in Delhi. I also volunteer with <strong>Connecting Dreams Foundation</strong>, driving digital engagement and community outreach.</p>
+    <br>
+    <p class="bio">I'm a creative thinker who believes the best portfolios aren't just about what you've done. They're about <span class="g">who you're becoming.</span></p>
+    <div class="a-stats">
+      <div class="stat rv"><div class="stat-n">1st</div><div class="stat-l">IIFT Delhi</div></div>
+      <div class="stat rv"><div class="stat-n">6+</div><div class="stat-l">National Finals</div></div>
+      <div class="stat rv"><div class="stat-n">2</div><div class="stat-l">Organisations</div></div>
+      <div class="stat rv"><div class="stat-n">5+</div><div class="stat-l">Published Works</div></div>
+    </div>
+  </div>
+  <div>
+    <blockquote class="a-quote rv">"The best portfolios aren't just about what you've done. They're about who you're becoming."</blockquote>
+    <div class="facts">
+      <div class="fact rv"><span class="fi">🏫</span><div class="ft"><strong>Satyawati College</strong> — B.A. English Honours, University of Delhi · 2025 to Present</div></div>
+      <div class="fact rv"><span class="fi">🌊</span><div class="ft"><strong>Project Nira</strong> — Sustainability and River Conservation, Enactus Satyawati</div></div>
+      <div class="fact rv"><span class="fi">🤝</span><div class="ft"><strong>Connecting Dreams Foundation</strong> — Volunteer, Content and Reel Production</div></div>
+      <div class="fact rv"><span class="fi">💻</span><div class="ft"><strong>IT Head</strong> — Rivalrio 3.0, Enactus Satyawati B-plan Competition</div></div>
+      <div class="fact rv"><span class="fi">🎮</span><div class="ft"><strong>Certified Game Developer</strong> — Expanding creative and technical skill set</div></div>
+      <div class="fact rv"><span class="fi">📍</span><div class="ft">Based in <strong>New Delhi, India</strong> — open to opportunities across India and beyond</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="s-label">Academic Journey</div>
+  <h2 class="s-title">Education &amp;<br><em>Formation.</em></h2>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2025 to Present</div>
+      <div class="tl-ttl">B.A. (Hons) English</div>
+      <div class="tl-sub">Satyawati College · University of Delhi</div>
+      <div class="tl-desc">Studying language, literature, and critical theory — building deep analytical and communication skills that underpin strategic thinking. Active core team member at Enactus Satyawati, contributing to real social entrepreneurship projects with measurable impact.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2025</div>
+      <div class="tl-ttl">Senior Secondary (ISC)</div>
+      <div class="tl-sub">Swaraj India Public School</div>
+      <div class="tl-desc">Completed senior secondary education with a focus on Commerce and Computers, building a strong foundation in business studies, accountancy, and digital tools.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-yr">2023</div>
+      <div class="tl-ttl">Secondary (ICSE) · 86%</div>
+      <div class="tl-sub">Swaraj India Public School</div>
+      <div class="tl-desc">Achieved 86% in ICSE Secondary examinations — demonstrating consistent academic performance across all core subjects.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <span class="mq-item"><span class="dot">◆</span> IIT Roorkee</span>
+    <span class="mq-item"><span class="dot">◆</span> IIT Kanpur</span>
+    <span class="mq-item"><span class="dot">◆</span> IIFT Delhi</span>
+    <span class="mq-item"><span class="dot">◆</span> Enactus India</span>
+    <span class="mq-item"><span class="dot">◆</span> Project Nira</span>
+    <span class="mq-item"><span class="dot">◆</span> Guru Nanak Dev Khalsa College</span>
+    <span class="mq-item"><span class="dot">◆</span> Dyal Singh College</span>
+    <span class="mq-item"><span class="dot">◆</span> Rivalrio 3.0</span>
+    <span class="mq-item"><span class="dot">◆</span> Connecting Dreams Foundation</span>
+    <span class="mq-item"><span class="dot">◆</span> IIT Roorkee</span>
+    <span class="mq-item"><span class="dot">◆</span> IIT Kanpur</span>
+    <span class="mq-item"><span class="dot">◆</span> IIFT Delhi</span>
+    <span class="mq-item"><span class="dot">◆</span> Enactus India</span>
+    <span class="mq-item"><span class="dot">◆</span> Project Nira</span>
+    <span class="mq-item"><span class="dot">◆</span> Guru Nanak Dev Khalsa College</span>
+    <span class="mq-item"><span class="dot">◆</span> Dyal Singh College</span>
+    <span class="mq-item"><span class="dot">◆</span> Rivalrio 3.0</span>
+    <span class="mq-item"><span class="dot">◆</span> Connecting Dreams Foundation</span>
+  </div>
+</div>
+
+<div class="div"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="s-label">Experience</div>
+  <h2 class="s-title">Where I've<br><em>Contributed.</em></h2>
+  <div class="exp-list">
+    <div class="exp-card rv">
+      <div class="exp-head">
+        <div><div class="exp-org">Enactus Satyawati</div><div class="exp-pl">Satyawati College, Delhi University</div></div>
+        <span class="exp-badge">Social Entrepreneurship</span>
+      </div>
+      <ul class="exp-bul">
+        <li>Designed and created content for the official Enactus Satyawati Instagram page, developing visuals that communicate project impact and team initiatives.</li>
+        <li>Actively managing the official LinkedIn page for Enactus Satyawati, growing the organisation's professional presence and outreach.</li>
+        <li>IT Head for Rivalrio 3.0, Enactus Satyawati's B-plan Competition — overseeing digital infrastructure and technical coordination for the national event.</li>
+      </ul>
+    </div>
+    <div class="exp-card rv">
+      <div class="exp-head">
+        <div><div class="exp-org">Connecting Dreams Foundation</div><div class="exp-pl">Satyawati College, Delhi University</div></div>
+        <span class="exp-badge">Volunteering</span>
+      </div>
+      <ul class="exp-bul">
+        <li>Volunteered at the Blind Relief Association exhibition, contributing to an event aimed at supporting and raising awareness for the visually impaired community.</li>
+        <li>Edited and produced Instagram Reels for the foundation's social media page, enhancing digital engagement and visibility for the organisation's outreach efforts.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="s-label">Portfolio</div>
+  <h2 class="s-title">My <em>Work.</em></h2>
+  <div class="work-grid">
+
+    <a href="https://www.instagram.com/p/DRR5L9iE0PT/" target="_blank" rel="noopener" class="work-card rv">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#0e0e24,#1a1a3a);">🎬<span class="work-lbl">Reel</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Instagram Reel</div>
+        <div class="work-org">Connecting Dreams Foundation</div>
+        <div class="work-arrow">View on Instagram</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DQjHTiKk956/" target="_blank" rel="noopener" class="work-card rv">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#0e2010,#1a3a1a);">🎬<span class="work-lbl">Reel</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Instagram Reel</div>
+        <div class="work-org">Connecting Dreams Foundation</div>
+        <div class="work-arrow">View on Instagram</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DWjyjbvkioK/" target="_blank" rel="noopener" class="work-card rv">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#20100e,#3a1a18);">📸<span class="work-lbl">Post</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Instagram Post</div>
+        <div class="work-org">Enactus Satyawati</div>
+        <div class="work-arrow">View on Instagram</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DXNDV0qEt2n/?img_index=3" target="_blank" rel="noopener" class="work-card rv">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#1e1a0a,#342e10);">🖼️<span class="work-lbl">Carousel</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Carousel Post</div>
+        <div class="work-org">Enactus Satyawati</div>
+        <div class="work-arrow">View on Instagram</div>
+      </div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DXNBlv9Eqev/?img_index=3" target="_blank" rel="noopener" class="work-card rv">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#0a1a1e,#102a30);">🖼️<span class="work-lbl">Carousel</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Carousel Post</div>
+        <div class="work-org">Enactus Satyawati</div>
+        <div class="work-arrow">View on Instagram</div>
+      </div>
+    </a>
+
+    <div class="work-card rv" style="pointer-events:none;">
+      <div class="work-thumb" style="background:linear-gradient(135deg,#1a0e24,#2a1838);font-family:var(--fd);font-size:1.1rem;color:var(--gold-light);font-weight:600;letter-spacing:.06em;">RIVALRIO 3.0<span class="work-lbl">Event</span></div>
+      <div class="work-info">
+        <div class="work-ttl">Rivalrio 3.0 · IT Head</div>
+        <div class="work-org">Enactus Satyawati · National B-plan Competition</div>
+        <div class="work-arrow" style="color:var(--muted);">National Event</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="s-label">Tools I Use</div>
+  <h2 class="s-title">My <em>Toolkit.</em></h2>
+  <div class="tools-grid">
+    <div class="tool-card rv"><div class="tool-icon">📋</div><div class="tool-name">Notion</div><div class="tool-cat">Project Management</div></div>
+    <div class="tool-card rv"><div class="tool-icon">🎨</div><div class="tool-name">Canva</div><div class="tool-cat">Design Tool</div></div>
+    <div class="tool-card rv"><div class="tool-icon">📊</div><div class="tool-name">PowerPoint</div><div class="tool-cat">Presentations</div></div>
+    <div class="tool-card rv"><div class="tool-icon">🎬</div><div class="tool-name">CapCut</div><div class="tool-cat">Video Editing</div></div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="s-label">Honours and Recognition</div>
+  <h2 class="s-title">Competitions &amp;<br><em>Awards.</em></h2>
+  <div class="ach-grid">
+
+    <div class="ach-card rv">
+      <div class="ach-rank">01</div>
+      <div class="ach-emoji">🥇</div>
+      <div class="ach-ttl">1st Position</div>
+      <div class="ach-org">Case Competition · IIFT Delhi, Industry Cell</div>
+      <div class="ach-desc">Secured first position at Indian Institute of Foreign Trade Delhi in a national-level case competition, competing against top college teams across India.</div>
+    </div>
+
+    <div class="ach-card rv">
+      <div class="ach-rank">02</div>
+      <div class="ach-emoji">🏆</div>
+      <div class="ach-ttl">National Finalist</div>
+      <div class="ach-org">Business Plan Competition · IIT Roorkee (Envision)</div>
+      <div class="ach-desc">Competed as a national finalist at IIT Roorkee's Envision — one of the most prestigious business plan competitions in the country.</div>
+    </div>
+
+    <div class="ach-card rv">
+      <div class="ach-rank">03</div>
+      <div class="ach-emoji">🏆</div>
+      <div class="ach-ttl">National Finalist</div>
+      <div class="ach-org">Business Plan Competition · IIT Roorkee (Ideastorm)</div>
+      <div class="ach-desc">Reached the national finals at IIT Roorkee's Ideastorm, presenting a compelling business plan before an industry jury.</div>
+    </div>
+
+    <div class="ach-card rv">
+      <div class="ach-rank">04</div>
+      <div class="ach-emoji">⚡</div>
+      <div class="ach-ttl">National Finalist</div>
+      <div class="ach-org">Business Plan Competition · IIT Kanpur</div>
+      <div class="ach-desc">Competed at IIT Kanpur's national-level competition, representing Enactus Satyawati and Project Nira on the national stage.</div>
+    </div>
+
+    <div class="ach-card rv">
+      <div class="ach-rank">05</div>
+      <div class="ach-emoji">🌟</div>
+      <div class="ach-ttl">National Finalist</div>
+      <div class="ach-org">Business Plan Competition · Guru Nanak Dev Khalsa College</div>
+      <div class="ach-desc">Reached the finals at Guru Nanak Dev Khalsa College's business plan competition, one of Delhi University's premier inter-college events.</div>
+    </div>
+
+    <div class="ach-card rv">
+      <div class="ach-rank">06</div>
+      <div class="ach-emoji">🎯</div>
+      <div class="ach-ttl">National Finalist</div>
+      <div class="ach-org">Business Plan Competition · Dyal Singh College</div>
+      <div class="ach-desc">Selected as a national finalist at Dyal Singh College's business plan competition, showcasing social entrepreneurship excellence.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="s-label">Capabilities</div>
+  <h2 class="s-title">Skills &amp;<br><em>Expertise.</em></h2>
+  <p class="skills-intro">A marketing-first thinker with a sharp eye for brand storytelling, audience psychology, and digital strategy — backed by hands-on content, campaign, and social media experience across real organisations.</p>
+
+  <div class="skill-cats">
+
+    <div>
+      <div class="skill-cat-ttl">Marketing and Digital</div>
+      <div class="skill-cards">
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">📣</div><div class="sk-name">Social Media Marketing</div><div class="sk-sub">Instagram · LinkedIn</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">✍️</div><div class="sk-name">Brand Storytelling</div><div class="sk-sub">Narrative and Tone</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🎯</div><div class="sk-name">Campaign Strategy</div><div class="sk-sub">Planning and Execution</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">📲</div><div class="sk-name">Content Strategy</div><div class="sk-sub">Visual and Written</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🧠</div><div class="sk-name">Audience Engagement</div><div class="sk-sub">Community Building</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🔍</div><div class="sk-name">Market Research</div><div class="sk-sub">Insights and Analysis</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">💬</div><div class="sk-name">Copywriting</div><div class="sk-sub">Captions · Scripts</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">📊</div><div class="sk-name">Digital Analytics</div><div class="sk-sub">Performance Tracking</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-cat-ttl">Communication and Writing</div>
+      <div class="skill-cards">
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🖊️</div><div class="sk-name">Critical Writing</div><div class="sk-sub">Analytical Essays</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">📖</div><div class="sk-name">Literary Analysis</div><div class="sk-sub">Research and Context</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🎤</div><div class="sk-name">Public Speaking</div><div class="sk-sub">Presentations and Pitches</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">📝</div><div class="sk-name">Content Writing</div><div class="sk-sub">Clear and Persuasive</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-cat-ttl">Business and Strategy</div>
+      <div class="skill-cards">
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">💡</div><div class="sk-name">Strategic Thinking</div><div class="sk-sub">Problem Solving</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">👥</div><div class="sk-name">HR and People Mgmt</div><div class="sk-sub">Concepts and Practice</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🌱</div><div class="sk-name">Social Entrepreneurship</div><div class="sk-sub">Enactus · Project Nira</div></div>
+        <div class="sk rv"><div class="sk-glow"></div><div class="sk-icon">🤝</div><div class="sk-name">Event Coordination</div><div class="sk-sub">Team Collaboration</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-cat-ttl">Tools and Technical</div>
+      <div class="soft-wrap">
+        <span class="soft">Canva</span>
+        <span class="soft">CapCut</span>
+        <span class="soft">Notion</span>
+        <span class="soft">PowerPoint</span>
+        <span class="soft">MS Office</span>
+        <span class="soft">Instagram</span>
+        <span class="soft">LinkedIn</span>
+        <span class="soft">Game Development</span>
+        <span class="soft">Reels Production</span>
+        <span class="soft">Carousel Design</span>
+        <span class="soft">Visual Storytelling</span>
+        <span class="soft">Research</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="c-inner">
+    <div class="s-label" style="justify-content:center;">Get In Touch</div>
+    <h2 class="s-title" style="text-align:center;margin-bottom:8px;">Got an <em>opportunity?</em><br>Let's talk.</h2>
+    <p class="bio" style="text-align:center;max-width:440px;margin:0 auto 8px;">Open to internships in Marketing, HR, and Social Impact. Reach out and let's build something meaningful together.</p>
+    <a href="mailto:usmaniali035@gmail.com" class="c-email">usmaniali035@gmail.com</a>
+    <div class="c-details">
+      <a href="tel:+919415125786" class="c-det">📱 <span>+91 94151 25786</span></a>
+      <div class="c-det">📍 <span>New Delhi, India</span></div>
+    </div>
+    <div class="c-links">
+      <a href="https://www.linkedin.com/in/muhammad-ali-usmani-667b76338/" target="_blank" rel="noopener" class="c-link">LinkedIn</a>
+      <a href="https://www.instagram.com/aliiusmani/" target="_blank" rel="noopener" class="c-link">Instagram</a>
+      <a href="mailto:usmaniali035@gmail.com" class="c-link">Send Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-name">Muhammad Ali Usmani</div>
+  <div class="f-copy">© 2025 · Satyawati College, Delhi University</div>
+  <div class="f-quote">"Chase excellence, success will follow."</div>
+</footer>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button,.stat,.exp-card,.ach-card,.work-card,.tool-card,.sk,.soft').forEach(el=>{
+  el.addEventListener('mouseenter',()=>curR.classList.add('h'));
+  el.addEventListener('mouseleave',()=>curR.classList.remove('h'));
+});
+
+// NAV SCROLL
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>50));
+
+// REVEAL OBSERVER
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');}});
+},{threshold:.1});
+document.querySelectorAll('.rv,.tl-item').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
